@@ -1,0 +1,22 @@
+<form class="form-login">
+  <h1 class="h3 mb-3 font-weight-normal">Please Add Product Details</h1>
+
+  <label for="inputProductName" class="sr-only">Product Type Name</label>
+  <input [(ngModel)]="product.name" name="departmentName" type="text" id="inputProductName" class="form-control"
+         placeholder="Product Name" required autofocus>
+
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {{ selectedProductType ? selectedProductType.name : 'Product Types' }}
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a *ngFor="let productType of productTypes" class="dropdown-item" (click)="onSelectProductType(productType)">{{productType.name}}</a>
+    </div>
+  </div>
+
+  <label for="inputProductPrice" class="sr-only">Product Price</label>
+  <input [(ngModel)]="product.price" name="productPrice" type="number" id="inputProductPrice"
+         class="form-control" placeholder="Price"
+         required autofocus>
+  <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="onCreate()">Create</button>
+</form>

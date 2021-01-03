@@ -1,4 +1,6 @@
-﻿using DAWProject.Models.DTOs;
+﻿using DAWProject.Controllers.Dtos;
+using DAWProject.Models;
+using DAWProject.Models.DTOs;
 using DAWProject.Services.UserService;
 using Microsoft.AspNetCore.Mvc;
 
@@ -25,6 +27,19 @@ namespace DAWProject.Controllers
                 return BadRequest(new { Message = "Username or Password is invalid!" });
             }
             return Ok(result);
+        }
+        
+        [HttpPost("register")]
+        public IActionResult Register(UserRegisterDto dto)
+        {
+            _userService.Create(new User
+            {
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                Username = dto.Username,
+                Password = dto.Password
+            });
+            return Ok();
         }
     }
 }

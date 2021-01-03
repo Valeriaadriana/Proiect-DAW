@@ -1,0 +1,18 @@
+<form class="form-login">
+  <h1 class="h3 mb-3 font-weight-normal">Please Product Type Details</h1>
+
+  <label for="inputProductTypeName" class="sr-only">Product Type Name</label>
+  <input [(ngModel)]="productType.name" name="productTypeName" type="text" id="inputProductTypeName"
+         class="form-control"
+         placeholder="Product Type Name" required autofocus>
+
+  <div class="form-check">
+    <input [(ngModel)]="productType.perishable" name="productTypePerishable" type="checkbox"
+           id="inputProductTypePerishable"
+           class="form-control"
+           required autofocus>
+    <label class="form-check-label" for="inputProductTypePerishable">Is It Perishable?</label>
+  </div>
+
+  <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="onCreate()">Create</button>
+</form>

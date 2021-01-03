@@ -1,0 +1,20 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Id</th>
+    <th scope="col">Name</th>
+    <th scope="col">Product Type</th>
+    <th scope="col">Perishable</th>
+    <th scope="col">Price</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let product of products">
+    <td>{{product.id}}</td>
+    <td>{{product.name}}</td>
+    <td>{{product.productType.name}}</td>
+    <td>{{product.productType.perishable | boolean}}</td>
+    <td>{{product.price}}</td>
+  </tr>
+  </tbody>
+</table>

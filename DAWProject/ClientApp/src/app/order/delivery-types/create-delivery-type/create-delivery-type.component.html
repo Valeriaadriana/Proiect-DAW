@@ -1,0 +1,15 @@
+<form class="form-login">
+  <h1 class="h3 mb-3 font-weight-normal">Please Product Type Details</h1>
+
+  <label for="inputDeliveryTypeName" class="sr-only">Product Type Name</label>
+  <input [(ngModel)]="deliveryType.name" name="deliveryTypeName" type="text" id="inputDeliveryTypeName"
+         class="form-control"
+         placeholder="Delivery Type Name" required autofocus>
+
+  <label for="inputProductPrice" class="sr-only">Delivery Type Price</label>
+  <input [(ngModel)]="deliveryType.price" name="deliveryTypePrice" type="number" id="inputProductPrice"
+         class="form-control" placeholder="Price"
+         required autofocus>
+
+  <button class="btn btn-lg btn-primary btn-block" type="submit" (click)="onCreate()">Create</button>
+</form>

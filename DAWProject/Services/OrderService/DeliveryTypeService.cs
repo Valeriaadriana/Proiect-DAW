@@ -1,13 +1,18 @@
 using DAWProject.Models;
-using DAWProject.Repositories.GenericRepository;
+using DAWProject.Repositories.DeliveryTypeRepository;
 using DAWProject.Services.BaseService;
 
 namespace DAWProject.Services.OrderService
 {
-    public class DeliveryTypeService : BaseService<DeliveryType>
+    public class DeliveryTypeService : BaseService<DeliveryType>, IDeliveryTypeService
     {
-        public DeliveryTypeService(IGenericRepository<DeliveryType> repository) : base(repository)
+        public DeliveryTypeService(IDeliveryTypeRepository repository) : base(repository)
         {
         }
+    }
+    
+    public interface IDeliveryTypeService : IBaseService<DeliveryType>
+    {
+        
     }
 }

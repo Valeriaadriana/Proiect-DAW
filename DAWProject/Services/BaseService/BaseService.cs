@@ -8,48 +8,48 @@ namespace DAWProject.Services.BaseService
 {
     public class BaseService<TEntity> : IBaseService<TEntity> where TEntity : BaseEntity
     {
-        protected IGenericRepository<TEntity> _repository;
+        protected readonly IGenericRepository<TEntity> Repository;
 
-        public BaseService(IGenericRepository<TEntity> repository)
+        protected BaseService(IGenericRepository<TEntity> repository)
         {
-            _repository = repository;
+            Repository = repository;
         }
 
         public List<TEntity> FindAll()
         {
-            return _repository.GetAllAsQuerable().ToList();
+            return Repository.GetAllAsQuerable().ToList();
         }
 
         public TEntity FindById(Guid id)
         {
-            return _repository.FindById(id);
+            return Repository.FindById(id);
         }
 
         public TEntity Create(TEntity entity)
         {
-            var newEntity = _repository.Create(entity);
-            _repository.Save();
+            var newEntity = Repository.Create(entity);
+            Repository.Save();
             return newEntity;
         }
 
         public TEntity Update(TEntity entity)
         {
-            var newEntity = _repository.Update(entity);
-            _repository.Save();
+            var newEntity = Repository.Update(entity);
+            Repository.Save();
             return newEntity;
         }
 
         public void Delete(TEntity entity)
         {
-            _repository.Delete(entity);
-            _repository.Save();
+            Repository.Delete(entity);
+            Repository.Save();
         }
 
         public void Delete(Guid id)
         {
-            var entity = _repository.FindById(id);
-            _repository.Delete(entity);
-            _repository.Save();
+            var entity = Repository.FindById(id);
+            Repository.Delete(entity);
+            Repository.Save();
         }
     }
 }

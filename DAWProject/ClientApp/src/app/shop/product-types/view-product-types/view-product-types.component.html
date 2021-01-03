@@ -1,0 +1,16 @@
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Id</th>
+    <th scope="col">Name</th>
+    <th scope="col">Perishable</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let productType of productTypes">
+    <td>{{productType.id}}</td>
+    <td>{{productType.name}}</td>
+    <td>{{productType.perishable | boolean }}</td>
+  </tr>
+  </tbody>
+</table>

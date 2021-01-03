@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using DAWProject.Controllers.Dtos;
 using DAWProject.Models.Base;
 using DAWProject.Services.BaseService;
 using Microsoft.AspNetCore.Mvc;
@@ -7,11 +9,13 @@ namespace DAWProject.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class BaseController<TEntity> : ControllerBase where TEntity : BaseEntity
+    public abstract class BaseController<TEntity, TEntityDto> : ControllerBase 
+        where TEntity : BaseEntity 
+        where TEntityDto : BaseDto
     {
-        protected readonly BaseService<TEntity> Service;
+        protected readonly IBaseService<TEntity> Service;
 
-        public BaseController(BaseService<TEntity> service)
+        protected BaseController(IBaseService<TEntity> service)
         {
             Service = service;
         }
@@ -19,25 +23,25 @@ namespace DAWProject.Controllers
         [HttpGet]
         public IActionResult GetAll()
         {
-            return Ok(Service.FindAll());
+            return Ok(Service.FindAll().Select(MapToDto));
         }
         
         [HttpGet("id")]
         public IActionResult GetById(Guid id)
         {
-            return Ok(Service.FindById(id));
+            return Ok(MapToDto(Service.FindById(id)));
         }
         
         [HttpPost]
-        public IActionResult Create(TEntity entity)
+        public IActionResult Create(TEntityDto dto)
         {
-            return Ok(Service.Create(entity));
+            return Ok(Service.Create(MapToModel(dto)));
         } 
         
         [HttpPut]
-        public IActionResult Update(TEntity entity)
+        public IActionResult Update(TEntityDto dto)
         {
-            return Ok(Service.Update(entity));
+            return Ok(Service.Update(MapToModel(dto)));
         } 
         
         [HttpDelete("id")]
@@ -45,6 +49,9 @@ namespace DAWProject.Controllers
         {
             Service.Delete(id);
             return Ok();
-        } 
+        }
+
+        public abstract TEntity MapToModel(TEntityDto dto);
+        public abstract TEntityDto MapToDto(TEntity model);
     }
 }

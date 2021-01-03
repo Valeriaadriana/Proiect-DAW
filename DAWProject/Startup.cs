@@ -1,5 +1,13 @@
 using DAWProject.Data;
 using DAWProject.Helpers;
+using DAWProject.Repositories.DeliveryTypeRepository;
+using DAWProject.Repositories.InvoiceRepository;
+using DAWProject.Repositories.OrderRepository;
+using DAWProject.Repositories.ProductRepository;
+using DAWProject.Repositories.ProductTypeRepository;
+using DAWProject.Repositories.UserRepository;
+using DAWProject.Services.OrderService;
+using DAWProject.Services.ProductService;
 using DAWProject.Services.UserService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -8,6 +16,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 
 namespace DAWProject
 {
@@ -23,7 +32,10 @@ namespace DAWProject
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore
+                );
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -31,11 +43,21 @@ namespace DAWProject
             });
             services.AddDbContext<DawAppContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-
             services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             services.AddScoped<IUserService, UserService>();
-
+            services.AddScoped<IDeliveryTypeService, DeliveryTypeService>();
+            services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IInvoiceService, InvoiceService>();
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IProductTypeService, ProductTypeService>();
+            
             // Repositories
+            services.AddTransient<IDeliveryTypeRepository, DeliveryTypeRepository>();
+            services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddTransient<IProductTypeRepository, ProductTypeRepository>();
+            services.AddTransient<IOrderRepository, OrderRepository>();
+            services.AddTransient<IInvoiceRepository, InvoiceRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

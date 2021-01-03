@@ -20,21 +20,72 @@
         [ngClass]="{ show: isExpanded }"
       >
         <ul class="navbar-nav flex-grow">
-          <li
+          <li *ngIf="isUserLoggedIn()"
             class="nav-item"
             [routerLinkActive]="['link-active']"
             [routerLinkActiveOptions]="{ exact: true }"
           >
-            <a class="nav-link text-dark" [routerLink]="['/']">Home</a>
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="productsNavDropdown"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Products
+              </button>
+              <div class="dropdown-menu" aria-labelledby="productsNavDropdown">
+                <a class="nav-link text-dark" [routerLink]="['/view-products']">View Products</a>
+                <a class="nav-link text-dark" [routerLink]="['/create-product']">Create A Product</a>
+              </div>
+            </div>
           </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/counter']"
-              >Counter</a
+
+          <li *ngIf="isUserLoggedIn()"
+            class="nav-item"
+            [routerLinkActive]="['link-active']"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="productTypesNavDropdown"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Product Types
+              </button>
+              <div class="dropdown-menu" aria-labelledby="productTypesNavDropdown">
+                <a class="nav-link text-dark" [routerLink]="['/view-product-types']">View Products Types</a>
+                <a class="nav-link text-dark" [routerLink]="['/create-product-type']">Create A Product Type</a>
+              </div>
+            </div>
+          </li>
+
+          <li *ngIf="isUserLoggedIn()"
+            class="nav-item"
+            [routerLinkActive]="['link-active']"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="deliveryTypesNavDropdown"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Delivery Types
+              </button>
+              <div class="dropdown-menu" aria-labelledby="productTypesNavDropdown">
+                <a class="nav-link text-dark" [routerLink]="['/view-delivery-types']">View Delivery Types</a>
+                <a class="nav-link text-dark" [routerLink]="['/create-delivery-type']">Create A Delivery Type</a>
+              </div>
+            </div>
+          </li>
+
+          <li *ngIf="isUserLoggedIn()" class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" (click)="logout()"
+            >Log out</a
             >
           </li>
-          <li class="nav-item" [routerLinkActive]="['link-active']">
-            <a class="nav-link text-dark" [routerLink]="['/fetch-data']"
-              >Fetch data</a
+
+          <li *ngIf="!isUserLoggedIn()" class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/login']"
+            >Log In</a
+            >
+          </li>
+
+          <li *ngIf="!isUserLoggedIn()" class="nav-item" [routerLinkActive]="['link-active']">
+            <a class="nav-link text-dark" [routerLink]="['/register']"
+            >Register</a
             >
           </li>
         </ul>
