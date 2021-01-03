@@ -1,6 +1,6 @@
 using DAWProject.Data;
 using DAWProject.Helpers;
-using DAWProject.Services.UserServices;
+using DAWProject.Services.UserService;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.SpaServices.AngularCli;

@@ -9,9 +9,9 @@ namespace DAWProject.Repositories.GenericRepository
         IQueryable<TEntity> GetAllAsQuerable();
         Task<List<TEntity>> GetAll();
 
-        void Create(TEntity entity);
+        TEntity Create(TEntity entity);
 
-        void Update(TEntity entity);
+        TEntity Update(TEntity entity);
 
         void Delete(TEntity entity);
 

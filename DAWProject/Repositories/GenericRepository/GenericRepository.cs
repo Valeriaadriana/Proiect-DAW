@@ -1,11 +1,11 @@
-﻿using DAWProject.Data;
-using Microsoft.Data.SqlClient;
-using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DAWProject.Data;
+using Microsoft.Data.SqlClient;
+using Microsoft.EntityFrameworkCore;
 
 namespace DAWProject.Repositories.GenericRepository
 {
@@ -29,14 +29,14 @@ namespace DAWProject.Repositories.GenericRepository
             return _table.AsNoTracking();
         }
 
-        public void Create(TEntity entity)
+        public TEntity Create(TEntity entity)
         {
-            _table.Add(entity);
+            return _table.Add(entity).Entity;
         }
 
-        public void Update(TEntity entity)
+        public TEntity Update(TEntity entity)
         {
-            _table.Update(entity);
+            return _table.Update(entity).Entity;
         }
 
         public void Delete(TEntity entity)

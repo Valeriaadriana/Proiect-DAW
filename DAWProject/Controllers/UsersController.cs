@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DAWProject.Helpers;
-using DAWProject.Models.DTOs;
-using DAWProject.Services.UserServices;
-using Microsoft.AspNetCore.Http;
+﻿using DAWProject.Models.DTOs;
+using DAWProject.Services.UserService;
 using Microsoft.AspNetCore.Mvc;
 
 namespace DAWProject.Controllers
@@ -21,10 +15,10 @@ namespace DAWProject.Controllers
             _userService = userService;
         }
 
-        [HttpPost("authentificate")]
-        public IActionResult Authentificate(UserRequestDTO user)
+        [HttpPost("authenticate")]
+        public IActionResult Authenticate(UserRequestDTO user)
         {
-            var result = _userService.Authentificate(user);
+            var result = _userService.Authenticate(user);
 
             if(result == null)
             {
@@ -32,14 +26,5 @@ namespace DAWProject.Controllers
             }
             return Ok(result);
         }
-
-        [Authorize]
-        [HttpGet]
-        public IActionResult GetAll()
-        {
-            var users = _userService.GetAllUsers();
-            return Ok(users);
-        }
-
     }
 }
