@@ -14,18 +14,21 @@ namespace DAWProject.Controllers
         }
 
 
-        [HttpGet("id")]
+        [HttpGet("user/{id}")]
         public IActionResult GetByUserId(Guid id)
         {
             var service = (OrderService) Service;
-            return Ok(service.FindByUserId(id));
+            return Ok(service.FindByUserId(id).Select(MapToDto));
         }
 
         public override Order MapToModel(OrderDto dto)
         {
             return new Order
             {
-                Id = dto.Id, Total = dto.Total, DeliveryDate = dto.DeliveryDate,
+                Id = dto.Id, 
+                Total = dto.Total,
+                UserId = dto.UserId,
+                DeliveryDate = dto.DeliveryDate,
                 DeliveryType = new DeliveryType
                 {
                     Name = dto.DeliveryType.Name,
@@ -54,7 +57,9 @@ namespace DAWProject.Controllers
         {
             return new OrderDto
             {
-                Id = model.Id, Total = model.Total, DeliveryDate = model.DeliveryDate,
+                Id = model.Id, 
+                Total = model.Total, 
+                DeliveryDate = model.DeliveryDate,
                 DeliveryType = new DeliveryTypeDto
                 {
                     Name = model.DeliveryType.Name,

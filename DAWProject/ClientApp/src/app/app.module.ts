@@ -19,6 +19,8 @@ import {Interceptor} from "./HttpInterceptor";
 import {AuthGuard} from "./auth.guard";
 import {LoginComponent} from "./shop/login/login.component";
 import {RegisterComponent} from "./shop/register/register.component";
+import {CreateOrderComponent} from "./order/orders/create-order/create-order.component";
+import {ViewOrdersComponent} from "./order/orders/view-orders/view-orders.component";
 
 @NgModule({
   declarations: [
@@ -41,6 +43,8 @@ import {RegisterComponent} from "./shop/register/register.component";
       {path: 'create-product-type', component: CreateProductTypeComponent, pathMatch: 'full', canActivate: [AuthGuard]},
       {path: 'view-delivery-types', component: ViewDeliveryTypesComponent, pathMatch: 'full', canActivate: [AuthGuard]},
       {path: 'create-delivery-type', component: CreateDeliveryTypeComponent, pathMatch: 'full', canActivate: [AuthGuard]},
+      {path: 'view-orders', component: ViewOrdersComponent, pathMatch: 'full', canActivate: [AuthGuard]},
+      {path: 'create-order', component: CreateOrderComponent, pathMatch: 'full', canActivate: [AuthGuard]},
     ])
   ],
   providers: [

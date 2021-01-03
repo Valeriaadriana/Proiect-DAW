@@ -21,6 +21,23 @@
       >
         <ul class="navbar-nav flex-grow">
           <li *ngIf="isUserLoggedIn()"
+              class="nav-item"
+              [routerLinkActive]="['link-active']"
+              [routerLinkActiveOptions]="{ exact: true }"
+          >
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="ordersNavDropdown"
+                      data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Orders
+              </button>
+              <div class="dropdown-menu" aria-labelledby="ordersNavDropdown">
+                <a class="nav-link text-dark" [routerLink]="['/view-orders']">View Orders</a>
+                <a class="nav-link text-dark" [routerLink]="['/create-order']">Create An Order</a>
+              </div>
+            </div>
+          </li>
+
+          <li *ngIf="isUserLoggedIn()"
             class="nav-item"
             [routerLinkActive]="['link-active']"
             [routerLinkActiveOptions]="{ exact: true }"

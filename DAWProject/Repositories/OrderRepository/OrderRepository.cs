@@ -18,7 +18,9 @@ namespace DAWProject.Repositories.OrderRepository
         {
             return _table.Where(order => order.UserId.Equals(id))
                 .Include(order => order.DeliveryType)
-                .Include(order => order)
+                .Include(order => order.Products)
+                .ThenInclude(op => op.Product)
+                .ThenInclude(product => product.ProductType)
                 .ToList();
         }
 

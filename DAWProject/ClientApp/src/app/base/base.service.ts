@@ -4,9 +4,9 @@ import {BaseEntity} from "./BaseEntity";
 
 export class BaseService<Entity extends BaseEntity> {
 
-  constructor(private http: HttpClient,
-              private readonly baseUrl: string,
-              private readonly endpoint: string) {
+  constructor(protected http: HttpClient,
+              protected readonly baseUrl: string,
+              protected readonly endpoint: string) {
     this.endpoint = baseUrl + 'api/'+ endpoint
   }
 

@@ -9,6 +9,7 @@ namespace DAWProject.Controllers.Dtos
     public DateTime DeliveryDate { get; set; }
     public DeliveryTypeDto DeliveryType { get; set; }
     public List<ProductDto> Products { get; set; }
+    public Guid UserId { get; set; }
     }
 
 

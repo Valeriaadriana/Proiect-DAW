@@ -26,7 +26,7 @@ namespace DAWProject.Controllers
             return Ok(Service.FindAll().Select(MapToDto));
         }
         
-        [HttpGet("id")]
+        [HttpGet("{id}")]
         public IActionResult GetById(Guid id)
         {
             return Ok(MapToDto(Service.FindById(id)));
@@ -44,7 +44,7 @@ namespace DAWProject.Controllers
             return Ok(Service.Update(MapToModel(dto)));
         } 
         
-        [HttpDelete("id")]
+        [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {
             Service.Delete(id);
